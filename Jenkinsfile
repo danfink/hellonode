@@ -11,7 +11,7 @@ node('docker-builder') {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        //app = docker.build("getintodevops/hellonode")
+        /*app = docker.build("getintodevops/hellonode")*/
         app = docker.build("getintodevops")
     }
 
@@ -38,5 +38,6 @@ node('docker-builder') {
         sh "\$(aws ecr get-login --no-include-email --region us-west-2)"
         docker.withRegistry('https://738502580174.dkr.ecr.us-west-2.amazonaws.com') {
             app.push("${env.BUILD_NUMBER}")
-            app.push("latest")    }
+            app.push("latest")    
+        }
 }
